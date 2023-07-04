@@ -1,0 +1,69 @@
+<!-- transaction_list.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Transações</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        h2 {
+            color: #777;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
+
+        tfoot td {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Transações</h1>
+
+    {% for seller, data in transaction_data.items %}
+        <h2>{{ seller }}</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Produto</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in data.transactions %}
+                    <tr>
+                        <td>{{ transaction.timestamp }}</td>
+                        <td>{{ transaction.product_name }}</td>
+                        <td>{{ transaction.value }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">Total:</td>
+                    <td>{{ data.total_value }}</td>
+                </tr>
+            </tfoot>
+        </table>
+    {% endfor %}
+</body>
+</html>
